@@ -1,0 +1,19 @@
+.mainHeader{
+    font-size:1.6em;
+    background:$black;
+    color:$white;
+}
+
+.mainTitle{
+    font-size:.8em;
+    font-weight:400;
+    // text-transform:uppercase;
+    letter-spacing:.2em;
+    display:block;
+    padding:.5em;
+    color:$white;
+    transition:color .2s;
+    &:hover{
+        color:$primary;
+    }
+}

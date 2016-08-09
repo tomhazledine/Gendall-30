@@ -1,0 +1,50 @@
+html{
+    // background:#eee;
+    font-family:$display;
+    height:100%;
+}
+body{
+    // padding:2em;
+    font-size:62.5%;
+    // width:80%;
+    margin:0 auto;
+    height:100%;
+}
+.mainWrapper{
+    font-size:1.6em;
+    // background:red;
+}
+h1,h2,h3,h4{
+    display:inline-block;
+    font-family:$display;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    font-weight:900;
+    // border-bottom:.2rem solid $black;
+}
+h1{
+    font-size:1.2em;
+}
+
+a{
+    text-decoration:none;
+    color:$primary;
+    transition:color .2s;
+    &:hover{
+        color:$black;
+    }
+}
+
+strong{
+    font-weight:bold;
+}
+
+code{
+    font-family:$code;
+    // color:$black;
+    background:$grey;
+    // color:$primary;
+    background:rgba(black,.1);
+    padding:0 .2em;
+    margin:0 .2em;
+}
