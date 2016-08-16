@@ -1,0 +1,77 @@
+.rangeWrapper{
+    width:100%;
+    position:relative;
+    height:2em;
+    .pseudoRangeBackground{
+        height:2em;
+        font-size:1em;
+        line-height:1;
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        background:$black;
+        overflow:hidden;
+    }
+    .pseudoRangeIndicator{
+        height:2em;
+        position:absolute;
+        top:0;
+        left:0;
+        background:rgba($primary,.4);
+        width:0%;
+    }
+    .pseudoRangePlayhead{
+        width:1em;
+        height:2em;
+        position:absolute;
+        top:50%;
+        left:0%;
+        margin-top:-1em;
+        margin-left:-.5em;
+        background:$primary;
+    }
+    .rangeSlider{
+        // Make sure the real range element
+        // is the same size as the fake one.
+        // Position it on-top of the fake and
+        // make it invisible (so we can still
+        // get the functionality)
+        width:100%;
+        padding:0;
+        margin:0;
+        position:absolute;
+        top:0;
+        left:0;
+        opacity:0;
+    }
+}
+
+// Make sure the range Track is the
+// right size and shape. Needs prefixed
+// versions to ensure cross-browser
+// consistency.
+input[type=range].rangeSlider::-webkit-slider-runnable-track {
+  width:100%;
+  font-size:1em;
+  height:2.2em;
+  cursor:pointer;
+}
+input[type=range].rangeSlider::-moz-range-track {
+  width:100%;
+  height:2em;
+  cursor:pointer;
+}
+input[type=range].rangeSlider::-ms-track {
+  width:100%;
+  height:2em;
+  cursor:pointer;
+}
+
+
+.rangeOuter{
+    margin:2em auto;
+    width:20em;
+    position:relative;
+    height:2em;
+}

@@ -35,6 +35,15 @@
     var master = context.createGain();
     master.gain.value = 0.5;
 
+    // DISTORTION
+    var distortion = context.createWaveShaper();
+    // distortion.curve = makeDistortionCurve(0);
+    // distortion.oversample = '4x';
+
+    // DELAY
+    var delay = context.createDelay();
+    delay.delayTime.value = 0;
+
     // CONNECTIONS
     // Here we link all our nodes
     // together. The final setting
@@ -44,7 +53,15 @@
     // can hear it.
     vco1.connect(vco1vol);
     vco1vol.connect(vca);
+
+    // No effects:
     vca.connect(master);
+    
+    // With effects:
+    // vca.connect(distortion);
+    // distortion.connect(delay);
+    // delay.connect(master);
+    
     master.connect(context.destination);
 
     /**
@@ -117,7 +134,7 @@ controlPad.on('mousein',function(e){
 
 controlPad.on('mouseout',function(e){
   // noteOn = false;
-  master.gain.value = 0;
+  vca.gain.value = 0;
 });
 
 controlPad.on('mousemove mousedown',function(e){
@@ -127,9 +144,9 @@ controlPad.on('mousemove mousedown',function(e){
     volumeInput = parseNoteValue(rawVolInput);
     pitchInput = parsePitchValue(rawPitchInput);
 
-    master.gain.value = volumeInput;
+    vca.gain.value = volumeInput;
     vco1.frequency.value = pitchInput;
-    vca.gain.value = 1;
+    // vca.gain.value = 1;
 
     controlPadMarker.style.top = rawVolInput + 'px';
     controlPadMarker.style.left = rawPitchInput + 'px';
@@ -193,3 +210,70 @@ function parseWave(int){
 function setWave(waveType){
     vco1.type = waveType;
 }
+
+// Get Wave-Type Selection
+var rangeSelector = $('.rangeSlider');
+rangeSelector.each(function(i){
+    // console.log('setting initial value');
+    var rawValue = $(this).val();
+    var rangeName = $(this).attr('name');
+    // console.log('setting initial value for ' . rangeName);
+    var parent = $(this).parent();
+    var playhead = parent.find('.pseudoRangePlayhead');
+    var progress = parent.find('.pseudoRangeIndicator');
+    playhead.css('left',rawValue + '%');
+    progress.css('width',rawValue + '%');
+});
+rangeSelector.on('input',function(){
+    var rawValue = $(this).val();
+    var rangeName = $(this).attr('name');
+    // console.log(rawValue);
+    // console.log(rangeName);
+    var parent = $(this).parent();
+    var playhead = parent.find('.pseudoRangePlayhead');
+    var progress = parent.find('.pseudoRangeIndicator');
+    playhead.css('left',rawValue + '%');
+    progress.css('width',rawValue + '%');
+    changeValue(rawValue,rangeName);
+});
+
+function changeValue(value,type){
+    switch (type) {
+        case 'distortion':
+            setDistortion(value);
+            break;
+        case 'volume':
+            setVolume(value);
+            break;
+    }
+}
+
+function setDistortion(value){
+    distortion.curve = makeDistortionCurve(value);
+}
+
+function setVolume(value){
+    console.log(value / 100);
+    master.gain.value = value / 100;
+}
+
+// var distortion = context.createWaveShaper();
+
+function makeDistortionCurve(amount) {
+  var k = typeof amount === 'number' ? amount : 50,
+    n_samples = 44100,
+    curve = new Float32Array(n_samples),
+    deg = Math.PI / 180,
+    i = 0,
+    x;
+  for ( ; i < n_samples; ++i ) {
+    x = i * 2 / n_samples - 1;
+    curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+  }
+  return curve;
+};
+
+// distortion.curve = makeDistortionCurve(400);
+// distortion.oversample = '4x';
+// distortion.connect(master);
+// distortion.connect(context.destination);
