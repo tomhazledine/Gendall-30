@@ -8,7 +8,7 @@
     // Create an oscillator using the API:
     var vco1 = context.createOscillator();
     // Set the waveform for our new VCO:
-    vco1.type = 'sine';//vco1wav;// OPTIONS: sine, square, sawtooth, triangle
+    vco1.type = 'triangle';//vco1wav;// OPTIONS: sine, square, sawtooth, triangle
     // Set the starting frequency for the VCO
     vco1.frequency.value = 440.00;// 440.00Hz = "A", the standard note all orchestras tune to.
     // Get the VCO running
@@ -43,6 +43,10 @@
     // DELAY
     var delay = context.createDelay();
     delay.delayTime.value = 0;
+    var delay_feedback = context.createGain();
+    delay_feedback.gain.value = 0.2;
+    var delay_filter = context.createBiquadFilter();
+    delay_filter.frequency.value = 2000;
 
     // CONNECTIONS
     // Here we link all our nodes
@@ -56,11 +60,16 @@
 
     // No effects:
     vca.connect(master);
+
+    vca.connect(delay);
+    delay.connect(delay_feedback);
+    delay_feedback.connect(delay_filter);
+    delay_filter.connect(delay);
     
     // With effects:
     // vca.connect(distortion);
     // distortion.connect(delay);
-    // delay.connect(master);
+    delay.connect(master);
     
     master.connect(context.destination);
 
@@ -245,11 +254,25 @@ function changeValue(value,type){
         case 'volume':
             setVolume(value);
             break;
+        case 'delay_duration':
+            setDelay(value);
+            break;
+        case 'delay_feedback':
+            setDelayFeedback(value);
+            break;
     }
 }
 
 function setDistortion(value){
     distortion.curve = makeDistortionCurve(value);
+}
+
+function setDelay(value){
+    delay.delayTime.value = value / 100;
+}
+
+function setDelayFeedback(value){
+    delay_feedback.gain.value = value / 100;
 }
 
 function setVolume(value){

@@ -6,7 +6,7 @@
         <h4>Wave Type</h4>
         <div class="clearfix">
             <div class="radioGroup">
-                <input type="radio" class="filterCheckbox" value="1" id="waveSelector_sine" name="waveSelector" checked/>
+                <input type="radio" class="filterCheckbox" value="1" id="waveSelector_sine" name="waveSelector"/>
                 <label for="waveSelector_sine" class="symLabel">
                     <h4 class="visuallyhidden">Sine</h4>
                     <svg class="selectedIcon">
@@ -24,7 +24,7 @@
                 </label>
             </div>
             <div class="radioGroup">
-                <input type="radio" class="filterCheckbox" value="3" id="waveSelector_triangle" name="waveSelector"/>
+                <input type="radio" class="filterCheckbox" value="3" id="waveSelector_triangle" name="waveSelector" checked/>
                 <label for="waveSelector_triangle" class="symLabel">
                     <h4 class="visuallyhidden">Triangle</h4>
                     <svg class="selectedIcon">
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div class="distortionWrapper rangeOuter">
+    <!-- <div class="distortionWrapper rangeOuter">
         <h4>Distortion</h4>
         <div class="rangeWrapper">
             <div class="pseudoRangeBackground"></div>
@@ -62,19 +62,28 @@
             <div class="pseudoRangePlayhead"></div>
             <input type="range" min="0" max="100" id="distortion" name="distortion" class="rangeSlider" value="0">
         </div>
-    </div>
+    </div> -->
 
-    <div class="echoWrapper rangeOuter">
-        <h4>Echo</h4>
+    <div class="rangeOuter">
+        <h4>Delay: Duration</h4>
         <div class="rangeWrapper">
             <div class="pseudoRangeBackground"></div>
             <div class="pseudoRangeIndicator"></div>
             <div class="pseudoRangePlayhead"></div>
-            <input type="range" min="0" max="100" id="echoSelector" name="echoSelector" class="rangeSlider" value="0">
+            <input type="range" min="0" max="100" id="delay_duration" name="delay_duration" class="rangeSlider" value="0">
+        </div>
+    </div>
+    <div class="rangeOuter">
+        <h4>Delay: Feedback</h4>
+        <div class="rangeWrapper">
+            <div class="pseudoRangeBackground"></div>
+            <div class="pseudoRangeIndicator"></div>
+            <div class="pseudoRangePlayhead"></div>
+            <input type="range" min="0" max="100" id="delay_feedback" name="delay_feedback" class="rangeSlider" value="20">
         </div>
     </div>
 
-    <div class="flangeWrapper rangeOuter">
+    <!-- <div class="flangeWrapper rangeOuter">
         <h4>Flange</h4>
         <div class="rangeWrapper">
             <div class="pseudoRangeBackground"></div>
@@ -82,7 +91,7 @@
             <div class="pseudoRangePlayhead"></div>
             <input type="range" min="0" max="100" id="flangeSelector" name="flangeSelector" class="rangeSlider" value="0">
         </div>
-    </div>
+    </div> -->
 
     <div class="controlPad">
         <div id="controlPadMarker" class="controlPadMarker"></div>
