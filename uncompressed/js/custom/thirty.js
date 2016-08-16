@@ -157,3 +157,39 @@ function parsePitchValue(input){
   output = output + 200;
   return output.toFixed(2);
 }
+
+
+// Get Wave-Type Selection
+var waveSelector = $('input[name="waveSelector"]');
+waveSelector.on('change',function(){
+    var rawWave = $(this).val();
+    var waveType = parseWave(rawWave);
+    setWave(waveType);
+});
+
+// Turn wave-type int into string
+function parseWave(int){
+    // Make sure the input is a string
+    string = int.toString();
+    var waveType = false;
+    switch (string) {
+        case '1':
+            waveType = 'sine';
+            break;
+        case '2':
+            waveType = 'square';
+            break;
+        case '3':
+            waveType = 'triangle';
+            break;
+        case '4':
+            waveType = 'sawtooth';
+            break;
+    }
+    return waveType;
+}
+
+// Set the wave type of an oscillator
+function setWave(waveType){
+    vco1.type = waveType;
+}

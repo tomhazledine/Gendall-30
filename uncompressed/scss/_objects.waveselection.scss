@@ -1,0 +1,54 @@
+.radioGroup label{
+    border:.1rem solid $grey;
+    text-align:center;
+    // padding:1em;
+    cursor:pointer;
+    // height:6em;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    box-sizing:content-box;
+}
+
+.radioGroup label .selectedIcon{
+    display:block;
+    margin:0 auto;
+    width:6em;
+    height:6em;
+    fill:$grey;
+}
+
+.radioGroup{
+    input[type="radio"]{
+        display:none;
+    }
+    input[type="radio"]:checked + label{
+        background:rgba($primary,.3);
+        .selectedIcon{
+            fill:$primary;
+        }
+    }
+}
+
+.waveTypeWrapper{
+    width:20em;
+    height:4em;
+    margin:1em auto;
+    .radioGroup{
+        width:5em;
+        height:4em;
+        float:left;
+        label{
+            border:.2rem solid $black;
+            border-right:0;
+            .selectedIcon{
+                width:4em;
+                height:4em;
+            }
+        }
+        &:last-of-type label{
+            border-right:.2rem solid $black;
+        }
+    }
+}

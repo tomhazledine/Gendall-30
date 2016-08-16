@@ -13,3 +13,7 @@
 </head>
 
 <body>
+    <div class="svgSpriteWrapper hidden">
+        <?php $rawSVG = file_get_contents("assets/icons/symbol/svg/sprite.symbol.svg"); ?>
+        <?= $rawSVG;//preg_replace( '/fill=("|\')(#)?([a-fA-F0-9]*)("|\')/i', '', $rawSVG ); ?>
+    </div>

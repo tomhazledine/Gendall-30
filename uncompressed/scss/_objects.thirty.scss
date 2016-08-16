@@ -5,6 +5,7 @@
     height:300px;
     cursor:none;
     overflow:hidden;
+    margin:2em auto;
 }
 
 .controlPadMarker{
@@ -13,8 +14,17 @@
     left:50%;
     width:1em;
     height:1em;
-    background:$red;
+    background:$primary;
     border-radius:.5em;
     margin-top:-.5em;
     margin-left:-.5em;
+    display:none;
+}
+
+.controlPad:hover .controlPadMarker{
+    display:block;
+}
+
+.visualOutputWrapper{
+    margin:2em auto;
 }
