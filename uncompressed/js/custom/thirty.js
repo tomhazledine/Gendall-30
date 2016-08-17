@@ -84,42 +84,7 @@
      * ---------------
      */
     audioAnalysis(context,master);
-
-
-// /**
-//  * GENDALL MAGICPAD
-//  */
-
-// var ocillators = [1,2,3,4];// array of oscillators to trigger
-
-// function noteOn(pitch,volume){
-//     for (var i = 0; i < oscilators.length; i++) {
-//         var newPitch = calculatePitchOffset(pitch,octave,tone);
-//         setOscillator(i,newPitch,volume);
-//     }
-// }
-
-// function noteOff(){
-//     for (var i = 0; i < oscilators.length; i++) {
-//         oscillator[i].volume = 0;
-//     }
-// }
-
-// function setOscillator(i,newPitch,volume){
-//     oscillator[i].volume = volume;
-//     oscillator[i].pitch = newPitch;
-// }
-
-// // parse numbers for 8ves and tones into actual multiplier for Hz
-// function calculatePitchOffset(pitch,multiple){
-//     var newMultiple = '';
-//     switch (multiple) {
-//         case '':
-//             newMultiple = '';
-//             break;
-//     }
-//     return pitch * newMultiple;
-// }
+    
 
 var controlPad = $('.controlPad');
 var controlPadMarker = document.getElementById('controlPadMarker');
@@ -132,10 +97,10 @@ var offset = controlPad.offset();
 
 
 /**
-     * ------------------
-     * CONTROL PAD EVENTS
-     * ------------------
-     */
+ * ------------------
+ * CONTROL PAD EVENTS
+ * ------------------
+ */
 controlPad.on('mousein',function(e){
   // noteOn = true;
   // newSynth.noteStart(400);
@@ -220,32 +185,34 @@ function setWave(waveType){
     vco1.type = waveType;
 }
 
-// Get Wave-Type Selection
+// Event Handlers for range inputs
 var rangeSelector = $('.rangeSlider');
 rangeSelector.each(function(i){
-    // console.log('setting initial value');
-    var rawValue = $(this).val();
-    var rangeName = $(this).attr('name');
-    // console.log('setting initial value for ' . rangeName);
-    var parent = $(this).parent();
-    var playhead = parent.find('.pseudoRangePlayhead');
-    var progress = parent.find('.pseudoRangeIndicator');
-    playhead.css('left',rawValue + '%');
-    progress.css('width',rawValue + '%');
+    updateRange($(this));
 });
 rangeSelector.on('input',function(){
-    var rawValue = $(this).val();
-    var rangeName = $(this).attr('name');
+    updateRange($(this));
+});
+
+// Update range input display, and
+// pass the value and method to the
+// changeValue() function.
+function updateRange(target){
+    var rawValue = target.val();
+    var rangeName = target.attr('name');
     // console.log(rawValue);
     // console.log(rangeName);
-    var parent = $(this).parent();
+    var parent = target.parent();
     var playhead = parent.find('.pseudoRangePlayhead');
     var progress = parent.find('.pseudoRangeIndicator');
     playhead.css('left',rawValue + '%');
     progress.css('width',rawValue + '%');
     changeValue(rawValue,rangeName);
-});
+}
 
+// Parse the method to be changed,
+// and then pass the value to the
+// relevant function.
 function changeValue(value,type){
     switch (type) {
         case 'distortion':
@@ -263,24 +230,27 @@ function changeValue(value,type){
     }
 }
 
+// Update the value of the distortion curve
 function setDistortion(value){
     distortion.curve = makeDistortionCurve(value);
 }
 
+// Set the delay duration
 function setDelay(value){
     delay.delayTime.value = value / 100;
 }
 
+// Set the delay feeback value
 function setDelayFeedback(value){
     delay_feedback.gain.value = value / 100;
 }
 
+// Update the master volume
 function setVolume(value){
     console.log(value / 100);
     master.gain.value = value / 100;
 }
 
-// var distortion = context.createWaveShaper();
 
 function makeDistortionCurve(amount) {
   var k = typeof amount === 'number' ? amount : 50,
@@ -295,8 +265,3 @@ function makeDistortionCurve(amount) {
   }
   return curve;
 };
-
-// distortion.curve = makeDistortionCurve(400);
-// distortion.oversample = '4x';
-// distortion.connect(master);
-// distortion.connect(context.destination);

@@ -70,7 +70,7 @@
             <div class="pseudoRangeBackground"></div>
             <div class="pseudoRangeIndicator"></div>
             <div class="pseudoRangePlayhead"></div>
-            <input type="range" min="0" max="100" id="delay_duration" name="delay_duration" class="rangeSlider" value="0">
+            <input type="range" min="0" max="100" id="delay_duration" name="delay_duration" class="rangeSlider" value="20">
         </div>
     </div>
     <div class="rangeOuter">
@@ -79,7 +79,7 @@
             <div class="pseudoRangeBackground"></div>
             <div class="pseudoRangeIndicator"></div>
             <div class="pseudoRangePlayhead"></div>
-            <input type="range" min="0" max="100" id="delay_feedback" name="delay_feedback" class="rangeSlider" value="20">
+            <input type="range" min="0" max="100" id="delay_feedback" name="delay_feedback" class="rangeSlider" value="30">
         </div>
     </div>
 
