@@ -84,7 +84,7 @@
      * ---------------
      */
     audioAnalysis(context,master);
-    
+
 
 var controlPad = $('.controlPad');
 var controlPadMarker = document.getElementById('controlPadMarker');
@@ -145,7 +145,8 @@ function parseNoteValue(input){
 // between 200.00 and 800.00 for pitch.
 function parsePitchValue(input){
   var output = input * 2;
-  output = output + 200;
+  var output = input * 10;
+  // output = output + 200;
   return output.toFixed(2);
 }
 
