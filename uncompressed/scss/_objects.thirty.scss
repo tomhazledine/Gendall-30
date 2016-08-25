@@ -14,11 +14,14 @@
     left:50%;
     width:1em;
     height:1em;
-    background:$primary;
+    background:$grey;
     border-radius:.5em;
     margin-top:-.5em;
     margin-left:-.5em;
     display:none;
+    &.active{
+        background:$primary;
+    }
 }
 
 .controlPad:hover .controlPadMarker{

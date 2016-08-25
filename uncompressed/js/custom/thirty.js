@@ -130,10 +130,12 @@ controlPad.on('mouseenter',function(e){
     }
 });
 
-controlPad.on('mouseup',function(e){
+$(document).on('mouseup',function(e){
+    console.log('mouseup');
     noteOn = false;
     notePersist = false;
     vca.gain.value = 0;
+    noQuery.removeClass(controlPadMarker,'active');
 });
 
 controlPad.on('mousemove',function(e){
@@ -156,6 +158,7 @@ function setMarker(x,y){
 function setNote(volume,pitch){
     volumeInput = parseNoteValue(volume);
     pitchInput = parsePitchValue(pitch);
+    noQuery.addClass(controlPadMarker,'active');
 
     vca.gain.value = volumeInput;
     vco1.frequency.value = pitchInput;
